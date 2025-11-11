@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/pmap/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="PowerMap Zambia - Real-time Power Outage Tracking Application">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="PowerMap Zambia">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>PowerMap Zambia - Power Outage Tracker</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Loading styles for better UX -->
+  <style>
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    .loading-spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 2s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    .loading-subtext {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading screen that shows while Flutter initializes -->
+  <div id="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">PowerMap Zambia</div>
+    <div class="loading-subtext">Loading outage tracker...</div>
+  </div>
+
+  <script src="flutter_bootstrap.js" async></script>
+
+  <script>
+    // Hide loading screen when Flutter app is ready
+    window.addEventListener('flutter-first-frame', function() {
+      document.getElementById('loading').style.display = 'none';
+    });
+
+    // Optional: Handle loading errors
+    window.addEventListener('flutter-error', function() {
+      document.getElementById('loading').innerHTML = 
+        '<div style="text-align: center; padding: 20px;">' +
+        '<h3>Failed to load PowerMap</h3>' +
+        '<p>Please check your internet connection and try again.</p>' +
+        '<button onclick="window.location.reload()">Retry</button>' +
+        '</div>';
+    });
+  </script>
+</body>
+</html>
